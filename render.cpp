@@ -1,7 +1,9 @@
 #include "render.h"
 
 Render::Render() {
+	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_ALPHA_TEST);
 }
 
 void Render::setupObject(Object* obj) {
@@ -91,6 +93,12 @@ void Render::drawObjectGL4(Object* obj, glm::vec3 camPos) {
 
 	int textureUnit = 0;
 	glUniform1i(4, textureUnit);
+	
+	glEnable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_ALPHA_TEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 	obj->mesh->tex->bind(textureUnit);
 
 	glDrawElements(GL_TRIANGLES, obj->mesh->faceList->size(), GL_UNSIGNED_INT,nullptr);
@@ -110,7 +118,7 @@ void Render::drawScene(Scene* scene) {
 	cam->computeMatrix();
 	view=cam->getMatrix();
 	proj=cam->getProjectionMatrix();
-	std::map<int,Object*>* objList=scene->getObjList();	
+	std::map<float,Object*, std::greater<float>>* objList=scene->orderedObjList;	
 	
 	for(auto it=objList->begin();
 			it!=objList->end();

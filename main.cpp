@@ -10,6 +10,7 @@
 #include "system.h"
 #include "enemy.h"
 #include "cube.h"
+#include "background.h"
 
 
 bool renderfps(double framerate) { 
@@ -43,29 +44,42 @@ int main(int argc, char** argv) {
 		std::cout << "ERROR iniciando glew\n";
 
 	InputManager::init(window);
-	/*
-	Object* triangle=new SpaceShip("triangle.trg");
-	triangle->scale=glm::vec3(0.1f,0.1f,0.1f);
+
+	Object* background = new Background("background.trg");
+	background->position = glm::vec3(3.0f, 3.0f, -2.0f);
+	background->scale = glm::vec3(12.0f, 12.0f, 1.0f);
+	
+	Object* triangle = new SpaceShip("triangle.trg");
+	triangle->scale=glm::vec3(0.35f,0.35f,0.35f);
 	triangle->position.y=-0.45f;
 	
+	/*
 	Object* enemy=new Enemy("triangle.trg");
 	enemy->scale=glm::vec3(0.1f,0.1f,0.1f);
 	enemy->position.y=0.45f;
 	enemy->rotation.z=glm::radians(180.0f);
 	*/
 
-	Object* bullet = new Enemy("bullet.trg");
-	bullet->scale = glm::vec3(0.2f, 0.2f, 0.2f);
-	bullet->position.y = 0.45f;
-	bullet->rotation.z = glm::radians(180.0f);
+	Object* enemy = new Enemy("triangle.trg");
+	enemy->scale = glm::vec3(0.35f, 0.35f, 0.35f);
+	enemy->position.y = 0.45f;
+	enemy->rotation.z = glm::radians(180.0f);
+	
+
 	
 	Render* render=new Render();
 	Scene* scene=new Scene();
 	System::scene=scene;
 	scene->setCamera(new Camera(glm::vec3(0.0f,0.0f,1.0f),glm::vec3(0.0f,0.0f,0.0f),perspective));
 
-	scene->addObject(bullet);
-	render->setupObject(bullet);
+	scene->addObject(background);
+	render->setupObject(background);
+	
+	scene->addObject(enemy);
+	render->setupObject(enemy);
+		
+	scene->addObject(triangle);
+	render->setupObject(triangle);
 
 	/*
 	scene->addObject(triangle);
@@ -85,7 +99,9 @@ int main(int argc, char** argv) {
 		if(renderfps(60.0f)) {
 			scene->step(0.0);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				render->drawScene(scene);
+				
+			glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+			render->drawScene(scene);
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 		}

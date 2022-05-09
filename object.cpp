@@ -5,8 +5,6 @@ int Object::idCounter=0;
 
 Object::Object()
 {
-
-
 	this->id=idCounter;
 	idCounter++;
 	this->mesh=new Mesh();

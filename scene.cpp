@@ -1,11 +1,11 @@
 #include "scene.h"
 
-
 Scene::Scene(){
 
-        objList=new std::map<int,Object*>();
-        addedObjList=new std::map<int,Object*>();
-        sceneGrid=new SpatialHashing(objList, 8,8 ,-1.0f ,-1.0f , 2.0f, 2.0f);
+    objList = new std::map<int,Object*>();
+    addedObjList = new std::map<int,Object*>();
+	orderedObjList = new std::map<float, Object*, std::greater<float>>();
+    sceneGrid = new SpatialHashing(objList, 8,8 ,-1.0f ,-1.0f , 2.0f, 2.0f);
 }
 
 void Scene::setCamera(Camera* cam){
@@ -17,9 +17,6 @@ Camera* Scene::getCamera(){
 	return cam;
 }
 
-
-
-
 void Scene::deleteObject(Object* obj){
 	
 	auto it=objList->find(obj->id);
@@ -27,17 +24,14 @@ void Scene::deleteObject(Object* obj){
 
 }
 
-
 std::map<int,Object*> * Scene::getObjList(){
 	return objList;
 }
-
 
 void Scene::addObject(Object* obj){
         (*addedObjList)[obj->id]=(obj);
         obj->computeMatrix();
 }
-
 
 void Scene::step(double timeStep)
 {
@@ -61,13 +55,13 @@ void Scene::step(double timeStep)
 	
 	sceneGrid->update();
 	cam->step();
-	for(auto it=objList->begin();
-		it!=objList->end();
+	for (auto it = objList->begin();
+		it != objList->end();
 		it++)
 	{
-		it->second->step();	
+		it->second->step();
 	}
-
+	
 	for(auto it=objList->begin();
 		it!=objList->end();
 		)
@@ -80,11 +74,16 @@ void Scene::step(double timeStep)
 		}
 	}
 
+	orderedObjList->clear();
+	for (auto it = objList->begin();
+		it != objList->end();
+		it++)
+	{
+		(*orderedObjList)[glm::distance(it->second->position, cam->getPosition())] = it->second;
+	}
+
 
 }
-
-
-
 
 Scene::~Scene()
 {
@@ -127,21 +126,4 @@ std::vector<Object*>* Scene::getCollisions(int idType, Object* obj)
 		}
 	}
 	return objects;
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

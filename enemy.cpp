@@ -11,7 +11,8 @@ void Enemy::step() {
 		Bullet* bullet=new Bullet("bullet.trg");
 		bullet->direction=-1.0f;
 		bullet->position.x=this->position.x;
-        bullet->position.y=this->position.y-0.25f;
+        bullet->position.y=this->position.y - 0.23f;
+		bullet->position.z = this->position.z - 0.1f;
 		bullet->scale=glm::vec3(0.1f,0.1f,0.1f);
 		System::scene->addObject(bullet);
 	}

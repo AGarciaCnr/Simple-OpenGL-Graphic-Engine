@@ -4,24 +4,33 @@
 #include "system.h"
 #include "bullet.h"
 
-void SpaceShip::step() {
-	if(InputManager::keys['A'])
-	{
-                position.x-=0.01f;
-	}	
 
-	if(InputManager::keys['D'])
-	{
-                position.x+=0.01f;
-	}
+bool shoot = true;
+
+void SpaceShip::step() {
 	
-	if(InputManager::keys['T'])
-	{ 	
-		Object* bullet=new Bullet("bullet.trg");
-		bullet->position.x=this->position.x;
-		bullet->position.y=this->position.y+0.15f;
-		bullet->scale=glm::vec3(0.1f,0.1f,0.1);
-		System::scene->addObject(bullet);
-	}
+    if (InputManager::keys['A'])
+    {
+        position.x -= 0.01f;
+    }
+
+    if (InputManager::keys['D'])
+    {
+        position.x += 0.01f;
+    }
+
+    if (InputManager::keys['T'] && (shoot == true))
+    {
+        Object* bullet = new Bullet("bullet.trg");
+        bullet->position.x = this->position.x;
+        bullet->position.y = this->position.y + 0.15f;
+        bullet->scale = glm::vec3(0.1f, 0.1f, 0.1);
+        System::scene->addObject(bullet);
+
+        shoot = false;
+    }
+
+    if (!InputManager::keys['T'])
+        shoot = true;
 }
 

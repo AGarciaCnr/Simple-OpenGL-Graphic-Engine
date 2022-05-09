@@ -36,7 +36,9 @@ void main() {
 
 	specular = Is * Ks * pow(max(dot(R, V), 0), 256); 
 	
-    gli_FragColor = (finalColor) * (amb + diffuse + specular);
+    // gli_FragColor = (finalColor/2) * (amb + diffuse + specular);
+	// textColor.a = 0.5f;
+	gli_FragColor = textColor;
 	
 }
 

@@ -15,3 +15,4 @@
 #define BULLET_OBJ 		1
 #define SPACESHIP_OBJ 	2
 #define CUBE_OBJ 		3
+#define BACKGROUND_OBJ  4

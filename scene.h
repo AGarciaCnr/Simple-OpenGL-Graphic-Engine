@@ -16,7 +16,8 @@ private:
 public:
 
 	std::map<int,Object*> *addedObjList=nullptr;
-	
+	std::map<float, Object*, std::greater<float>>* orderedObjList = nullptr;
+
 	Scene();
 	void setCamera(Camera* cam);
 	Camera* getCamera();
