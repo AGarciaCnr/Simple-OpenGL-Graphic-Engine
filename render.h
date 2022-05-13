@@ -4,6 +4,7 @@
 #include "mesh.h"
 #include "object.h"
 #include "scene.h"
+#include "background.h"
 
 typedef struct bufferObject_t{
 	unsigned int abo; //array buffer object ID

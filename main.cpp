@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
 	if (!glfwState)
 		std::cout << "ERROR iniciando glfw\n";
 
-	GLFWwindow* window = glfwCreateWindow(640,480,"Prueba 1 GLFW",nullptr,nullptr);
+	GLFWwindow* window = glfwCreateWindow(1920, 1080, "Prueba 1 GLFW", glfwGetPrimaryMonitor(), nullptr);
 	glfwMakeContextCurrent(window);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
@@ -46,11 +46,15 @@ int main(int argc, char** argv) {
 	InputManager::init(window);
 
 	Object* background = new Background("background.trg");
-	background->position = glm::vec3(3.0f, 3.0f, -2.0f);
+	background->position = glm::vec3(4.0f, 3.0f, -2.0f);
 	background->scale = glm::vec3(12.0f, 12.0f, 1.0f);
 	
+	Object* background2 = new Background("background.trg");
+	background2->position = glm::vec3(-2.0f, 3.0f, -2.0f);
+	background2->scale = glm::vec3(12.0f, 12.0f, 1.0f);
+	
 	Object* triangle = new SpaceShip("triangle.trg");
-	triangle->scale=glm::vec3(0.35f,0.35f,0.35f);
+	triangle->scale=glm::vec3(0.1f,0.1f,0.1f);
 	triangle->position.y=-0.45f;
 	
 	/*
@@ -61,7 +65,7 @@ int main(int argc, char** argv) {
 	*/
 
 	Object* enemy = new Enemy("triangle.trg");
-	enemy->scale = glm::vec3(0.35f, 0.35f, 0.35f);
+	enemy->scale = glm::vec3(0.1f, 0.1f, 0.1f);
 	enemy->position.y = 0.45f;
 	enemy->rotation.z = glm::radians(180.0f);
 	
@@ -74,6 +78,9 @@ int main(int argc, char** argv) {
 
 	scene->addObject(background);
 	render->setupObject(background);
+	
+	scene->addObject(background2);
+	render->setupObject(background2);
 	
 	scene->addObject(enemy);
 	render->setupObject(enemy);

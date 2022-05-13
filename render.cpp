@@ -93,6 +93,16 @@ void Render::drawObjectGL4(Object* obj, glm::vec3 camPos) {
 
 	int textureUnit = 0;
 	glUniform1i(4, textureUnit);
+
+	if (obj->typeObject == BACKGROUND_OBJ) {
+		Background* background = dynamic_cast<Background*>(obj);
+		glm::vec2 scroll = background->scroll;
+		glUniform2fv(5, 1, &scroll[0]);
+	}
+	else {
+		glm::vec2 scroll = glm::vec2(0, 0);
+		glUniform2fv(5, 1, &scroll[0]);
+	}
 	
 	glEnable(GL_BLEND);
 	glEnable(GL_DEPTH_TEST);
