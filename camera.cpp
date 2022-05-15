@@ -36,7 +36,29 @@ glm::mat4 Camera::getProjectionMatrix(){
 }
 
 void Camera::step() {
+	if (InputManager::keys['F'])
+	{
+		position.x -= 0.02f;
+		lookAt.x -= 0.02f;
+	}
 
+	if (InputManager::keys['H'])
+	{
+		position.x += 0.02f;
+		lookAt.x += 0.02f;
+	}
+
+	if (InputManager::keys['T'])
+	{
+		position.z -= 0.02f;
+		lookAt.z -= 0.02f;
+	}
+
+	if (InputManager::keys['G'])
+	{
+		position.z += 0.02f;
+		lookAt.z += 0.02f;		
+	}
 }
 
 

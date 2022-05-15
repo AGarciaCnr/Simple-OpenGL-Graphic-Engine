@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 
-
 Mesh::Mesh(){
 
 	vertexList=new std::vector<vertex_t>();
@@ -32,8 +31,6 @@ Mesh::Mesh(std::string fileName){
 //añadir vértices
 	loadFromFile(fileName);
 }
-
-
 
 
 void Mesh::setColor(int idxVertex, glm::vec4 color){
