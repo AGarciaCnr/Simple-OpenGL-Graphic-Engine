@@ -1,5 +1,6 @@
 #pragma once
 #include "object.h"
+#include <ctime>
 
 class Enemy: public Object{
 

@@ -12,4 +12,4 @@
 3 4 5
 vshader.txt
 fshader.txt
-data/ship1.png
+data/kirby.png

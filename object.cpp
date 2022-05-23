@@ -1,4 +1,3 @@
-
 #include "object.h"
 
 int Object::idCounter=0;

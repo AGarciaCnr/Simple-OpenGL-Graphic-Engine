@@ -8,4 +8,4 @@
 0 2 3
 vshader.txt
 fshader.txt
-data/background.jpg
+data/camino.png

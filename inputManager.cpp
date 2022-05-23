@@ -14,8 +14,6 @@ void updateKeys(GLFWwindow* window, int key, int scancode, int action, int mods)
 	case GLFW_RELEASE:
 		InputManager::keys[key] = 0;
 		break;
-
-
 	}
 
 }

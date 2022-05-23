@@ -12,7 +12,7 @@
 #include "cube.h"
 #include "background.h"
 
-#define MODE 0
+#define MODE 1
 
 bool renderfps(double framerate) { 
 	static double currentTime = 0; 
@@ -56,26 +56,22 @@ int main(int argc, char** argv) {
 
 		Object* background = new Background("background.trg");
 		background->position = glm::vec3(4.0f, 3.0f, -2.0f);
-		background->scale = glm::vec3(12.0f, 12.0f, 1.0f);
+		background->scale = glm::vec3(16.0f, 12.0f, 1.0f);
 
-		Object* background2 = new Background("background.trg");
-		background2->position = glm::vec3(-2.0f, 3.0f, -2.0f);
-		background2->scale = glm::vec3(12.0f, 12.0f, 1.0f);
+		Object* triangle = new SpaceShip("kirby.trg");
+		triangle->scale = glm::vec3(0.25f, 0.15f, 0.3f);
+		triangle->position.y = -0.75f;
+		triangle->position.z = -0.1f;
+		triangle->rotation.z = glm::radians(180.0f);
 
-		Object* triangle = new SpaceShip("triangle.trg");
-		triangle->scale = glm::vec3(0.1f, 0.1f, 0.1f);
-		triangle->position.y = -0.45f;
-
-		Object* enemy = new Enemy("triangle.trg");
+		Object* enemy = new Enemy("bullet.trg");
 		enemy->scale = glm::vec3(0.1f, 0.1f, 0.1f);
-		enemy->position.y = 0.45f;
+		enemy->position.y = 2.5f;
+		enemy->position.z = -1.0f;
 		enemy->rotation.z = glm::radians(180.0f);
 
 		scene->addObject(background);
 		render->setupObject(background);
-
-		scene->addObject(background2);
-		render->setupObject(background2);
 
 		scene->addObject(enemy);
 		render->setupObject(enemy);

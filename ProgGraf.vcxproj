@@ -194,6 +194,7 @@
     <None Include="background.trg" />
     <None Include="bullet.trg" />
     <None Include="cube.trg" />
+    <None Include="kirby.trg" />
     <None Include="Makefile" />
     <None Include="triangle.trg" />
   </ItemGroup>
